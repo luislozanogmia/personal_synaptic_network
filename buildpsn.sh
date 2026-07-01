@@ -5,7 +5,7 @@
 set -e
 
 echo "=== Personal Synaptic Network (PSN) ==="
-echo "Building your synthetic brain..."
+echo "Setting up..."
 echo ""
 
 # Check Python
