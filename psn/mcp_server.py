@@ -4,7 +4,7 @@ Connect your PSN to any MCP-compatible client (Claude Desktop, Claude Code,
 Cursor, Cline, etc.) and use your personal thought compass directly in chat.
 
 Usage:
-    # stdio transport (default — for Claude Desktop, Cursor, etc.)
+    # stdio transport (default, for Claude Desktop, Cursor, etc.)
     python -m psn.mcp_server
 
     # HTTP transport (for remote / multi-client access)
@@ -78,11 +78,11 @@ def get_psn() -> PSN:
 mcp = FastMCP(
     "Personal Synaptic Network",
     instructions=(
-        "Personal Synaptic Network (PSN) — a Hopfield associative memory "
+        "Personal Synaptic Network (PSN): a Hopfield associative memory "
         "that stores thought patterns via Hebbian learning. Use 'recall' to "
         "query the network with a natural language cue and get back the most "
         "associated stored thoughts. Use 'store' to add new thoughts. "
-        "Use 'compass' for decision validation — it retrieves patterns that "
+        "Use 'compass' for decision validation: it retrieves patterns that "
         "reveal how the person actually thinks about a topic."
     ),
 )
@@ -94,7 +94,7 @@ def recall(cue: str, top_k: int = 5) -> str:
 
     Give a natural language cue and the network will activate neurons,
     run attractor dynamics, and return the closest stored patterns.
-    This is associative recall — not keyword search.
+    This is associative recall, not keyword search.
 
     Args:
         cue: Natural language query (e.g., "how should I approach hard decisions")
@@ -162,7 +162,7 @@ def compass(decision: str, n_perspectives: int = 5) -> str:
 
     Given a decision or dilemma, the network retrieves your own stored
     thought patterns most associated with it. This reveals how YOU
-    actually think about this kind of problem — based on patterns
+    actually think about this kind of problem, based on patterns
     from your real conversations and thoughts.
 
     This is personal validation: checking a solution against who you ARE.
@@ -194,11 +194,11 @@ def compass(decision: str, n_perspectives: int = 5) -> str:
     )
 
     if avg_resonance >= 0.5:
-        signal = "STRONG — your stored patterns clearly relate to this decision"
+        signal = "STRONG: your stored patterns clearly relate to this decision"
     elif avg_resonance >= 0.35:
-        signal = "MODERATE — some relevant patterns found"
+        signal = "MODERATE: some relevant patterns found"
     else:
-        signal = "WEAK — this may be outside your stored experience"
+        signal = "WEAK: this may be outside your stored experience"
 
     return json.dumps({
         "decision": decision,

@@ -1,7 +1,7 @@
 """Memory store: metadata index alongside synaptic patterns.
 
-Optimized for scale: stores only embeddings (384d) and active neuron indices,
-NOT full 50K dense activation vectors. At 86K thoughts this saves ~17GB RAM.
+Stores only embeddings (384d) and active neuron indices rather than dense
+activation vectors, so memory stays flat as the corpus grows.
 """
 
 import time
@@ -16,7 +16,7 @@ class MemoryEntry:
     text: str
     timestamp: float
     embedding: torch.Tensor  # [d_embedding] dense (384d = 1.5KB)
-    active_indices: list[int]  # which neurons fired (~1000 ints = 4KB)
+    active_indices: list[int]  # which neurons fired
     retrieval_count: int = 0
     tags: list[str] = field(default_factory=list)
 
@@ -40,7 +40,7 @@ class MemoryStore:
 
     def add(self, text: str, embedding: torch.Tensor, activation: torch.Tensor,
             active_indices: torch.Tensor, tags: list[str] = None) -> int:
-        """Store a new thought (sparse — only embedding + active indices)."""
+        """Store a new thought (sparse: only embedding + active indices)."""
         entry = MemoryEntry(
             id=self._next_id,
             text=text,
@@ -62,7 +62,7 @@ class MemoryStore:
 
         Given a converged attractor activation, find which stored patterns share
         the most active neurons (set intersection / set union).
-        Memory-efficient: no 50K-dim dense vectors needed.
+        Memory-efficient: compares active-neuron sets, no dense vectors needed.
         """
         if not self.entries:
             return []

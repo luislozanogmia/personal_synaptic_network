@@ -1,4 +1,4 @@
-"""PSN configuration — all hyperparameters in one place."""
+"""PSN configuration: all hyperparameters in one place."""
 
 import torch
 from dataclasses import dataclass, field
@@ -7,7 +7,7 @@ from pathlib import Path
 
 @dataclass
 class PSNConfig:
-    # Network topology (200 neurons is sufficient — tested 50K->200 with same recall quality)
+    # Network topology (200 neurons is sufficient: tested 50K->200 with same recall quality)
     n_neurons: int = 200
     n_blocks: int = 4
     block_size: int = 50  # n_neurons / n_blocks
@@ -40,7 +40,7 @@ class PSNConfig:
     # Persistence
     checkpoint_dir: Path = field(default_factory=lambda: Path("psn/checkpoints"))
 
-    # Hardware (CPU is sufficient for 200 neurons — no GPU needed)
+    # Hardware (CPU is sufficient for 200 neurons, no GPU needed)
     device: str = "cpu"
 
     def __post_init__(self):

@@ -13,7 +13,7 @@ from .persistence import save_checkpoint, load_checkpoint
 
 
 class PSN:
-    """Personal Synaptic Network — store and retrieve one person's thought patterns."""
+    """Personal Synaptic Network: store and retrieve one person's thought patterns."""
 
     def __init__(self, config: PSNConfig = None):
         self.config = config or PSNConfig()

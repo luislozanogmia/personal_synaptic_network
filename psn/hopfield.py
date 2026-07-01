@@ -9,7 +9,7 @@ class HopfieldNetwork:
     """Modern Hopfield Network with sparse block connectivity.
 
     Architecture:
-        - 100 blocks of 500 neurons each (50K total)
+        - Configurable blocks of neurons (default 4 blocks of 50, 200 total)
         - Dense symmetric connectivity within each block (W_intra)
         - Sparse connectivity between blocks (W_inter)
         - Energy-based attractor dynamics for pattern retrieval
@@ -24,7 +24,7 @@ class HopfieldNetwork:
         self.device = config.device
 
         # Intra-block weights: [n_blocks, block_size, block_size]
-        # Symmetric, zero diagonal — initialized to zero (no stored patterns yet)
+        # Symmetric, zero diagonal, initialized to zero (no stored patterns yet)
         self.W_intra = torch.zeros(
             config.n_blocks, config.block_size, config.block_size,
             device=self.device, dtype=torch.float32

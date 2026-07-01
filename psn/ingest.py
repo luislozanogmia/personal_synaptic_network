@@ -1,4 +1,4 @@
-"""Ingest conversations into the PSN — extract human messages, chunk, and store."""
+"""Ingest conversations into the PSN: extract human messages, chunk, and store."""
 
 import json
 import zipfile

@@ -1,4 +1,4 @@
-"""Sparse projection: dense embedding -> sparse 50K activation via k-winners-take-all."""
+"""Sparse projection: dense embedding -> sparse neuron activation via k-winners-take-all."""
 
 import torch
 import torch.nn.functional as F

@@ -1,20 +1,18 @@
 # Personal Synaptic Network (PSN)
 A blank-slate neural network that stores your thought patterns as synaptic weights and retrieves them as a decision compass.
 
-It is not a chatbot memory, not RAG, not a knowledge graph. It is a Hebbian attractor network where neurons that fire together wire together, shaped entirely by your cognitive output. You feed it your thoughts — notes, conversations, ideas, anything in text. Each thought activates a sparse pattern across thousands of artificial neurons, about 2% firing per thought, mimicking the sparse distributed representations your biological brain uses. Co-active neurons strengthen their connections. Over time, the network builds a map of your associative structure: which ideas you connect, which domains you bridge, which patterns you repeat. Retrieval is not search — it is pattern completion. Give it a partial cue and the network settles into the closest stored pattern, the same way you remember a song from its first three notes rather than searching a database. Every AI memory system today stores and retrieves text. The PSN stores and retrieves patterns — the shape of how you think, not just what you said. When connected to an LLM, it acts as a personal validation layer: the model doesn't just know your facts, it navigates your cognitive topology before it generates a single token.
-
-**A Personal Synaptic Network (PSN) that stores your thought patterns in a neural network and retrieves them as a decision compass.**
+It is not chatbot memory, RAG, or a knowledge graph. It is a Hebbian attractor network shaped entirely by your own text: notes, conversations, ideas. Each thought activates a sparse pattern across the artificial neurons (about 2% fire per thought), and co-active neurons strengthen their connections. Over time the network maps your associative structure: which ideas you connect, which domains you bridge, which patterns you repeat. Retrieval is pattern completion, not search: give it a partial cue and it settles into the closest stored pattern. Connected to an LLM, it acts as a personal validation layer that checks a response against how you actually think.
 
 ---
 
 ## What It Does
 
-1. You feed it your thoughts (conversations, notes, ideas — any text)
+1. You feed it your thoughts (conversations, notes, ideas, any text)
 2. It converts each thought into a sparse activation pattern across 200 artificial neurons (expandable)
-3. Neurons that fire together get wired together (Hebbian learning — same rule as your biological brain)
+3. Neurons that fire together get wired together (Hebbian learning, the same rule your brain uses)
 4. When you give it a cue, it retrieves the stored patterns most associated with that cue
 
-**It's not a search engine.** It doesn't match keywords. It activates neurons and lets the network settle into the closest stored pattern — like how you remember by association.
+**It's not a search engine.** It doesn't match keywords. It activates neurons and lets the network settle into the closest stored pattern, the way you remember by association.
 
 ## How It Works
 
@@ -31,7 +29,7 @@ Your cue (text)
     → Top matches returned with similarity scores
 ```
 
-**Architecture**: Modern Hopfield Network with sparse block connectivity (4 blocks of 50 neurons). Energy-based attractor dynamics. Online Hebbian learning — no backprop, no optimizer, no training loop.
+**Architecture**: Modern Hopfield Network with sparse block connectivity (4 blocks of 50 neurons). Energy-based attractor dynamics. Online Hebbian learning: no backprop, no optimizer, no training loop.
 
 ## Quick Start
 
@@ -76,7 +74,7 @@ python -m psn ingest --chatgpt export.zip --dry-run
 ChatGPT exports: Settings → Data Controls → Export Data.
 Claude exports: Settings → Account → Export Data.
 
-## MCP Server — Connect to Your Chat
+## MCP Server: Connect to Your Chat
 
 The PSN includes an MCP (Model Context Protocol) server so you can use your personal compass directly from Claude Desktop, Claude Code, Cursor, Cline, or any MCP-compatible client.
 
@@ -141,7 +139,7 @@ Replace `/path/to/personal_synaptic_network` with your actual clone path. Use th
 |------|-------------|
 | `recall` | Query the network with a natural language cue. Returns associated thought patterns with similarity scores. |
 | `store` | Add a new thought to the network. Hebbian learning fires immediately. |
-| `compass` | Decision validation — surfaces your own thought patterns most relevant to a decision or dilemma. Returns a signal strength (STRONG/MODERATE/WEAK). |
+| `compass` | Decision validation: surfaces your own thought patterns most relevant to a decision or dilemma. Returns a signal strength (STRONG/MODERATE/WEAK). |
 | `status` | Network metrics: neuron count, stored patterns, weight norms, memory usage. |
 
 ### Example Usage (in chat)
@@ -194,7 +192,7 @@ requirements.txt        # Dependencies
 ## Requirements
 
 - Python 3.10+
-- PyTorch 2.0+ (CPU only — no GPU needed)
+- PyTorch 2.0+ (CPU only, no GPU needed)
 - FastMCP 1.0+ (for MCP server)
 - ~50MB disk for the network + embedding model
 
@@ -202,7 +200,7 @@ requirements.txt        # Dependencies
 
 Tested against 33 historical decision inflection points from one person's conversation history (86,505 stored thoughts):
 
-**Round 1 — 15 life + career decisions:**
+**Round 1: 15 life and career decisions**
 
 | Metric | Result |
 |---|---|
@@ -211,7 +209,7 @@ Tested against 33 historical decision inflection points from one person's conver
 | Partially aligned | 2 (13.3%) |
 | Wrong direction | 0 (0%) |
 
-**Round 2 — 18 architectural + technical decisions:**
+**Round 2: 18 architectural and technical decisions**
 
 | Metric | Result |
 |---|---|
@@ -240,7 +238,7 @@ The compass never pointed the wrong way across 33 tested decisions.
 - `[0.737]` "Catastrophic forgetting? more like Catastrophic collisions..."
 - `[0.563]` "Stage 3 — Early Attention Layers (Pattern Hooking)..."
 
-The network surfaced the person's own reasoning — patterns stored months earlier — that aligned with decisions they eventually made.
+The network surfaced the person's own reasoning, patterns stored months earlier, that aligned with decisions they eventually made.
 
 ## The Science
 
@@ -251,7 +249,7 @@ The network surfaced the person's own reasoning — patterns stored months earli
 
 ## Why 200 Neurons Is Enough
 
-We tested 50,000 neurons (462 MB checkpoint, GPU required) against 200 neurons (0.3 MB checkpoint, CPU only) on the same 13K+ thought corpus. Recall quality is identical — the sentence-transformer embedding (384d) does the heavy lifting for similarity matching, while the Hopfield attractor dynamics work just as well with sparse 200-neuron activations. The 50K network used 1,500x more memory for no measurable recall improvement.
+We tested 50,000 neurons (462 MB checkpoint, GPU required) against 200 neurons (0.3 MB checkpoint, CPU only) on the same 13K+ thought corpus. Recall quality is identical: the sentence-transformer embedding (384d) does the heavy lifting for similarity matching, while the Hopfield attractor dynamics work just as well with sparse 200-neuron activations. The 50K network used 1,500x more memory for no measurable recall improvement.
 
 | Config | Neurons | Checkpoint | RAM | Device | Recall quality |
 |--------|---------|-----------|-----|--------|---------------|
@@ -273,10 +271,10 @@ Pre-reasoning prevents structural drift. PSN prevents personally wrong answers.
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT. See [LICENSE](LICENSE).
 
 ## Built By
 
-[Mia Labs](https://mia-labs.com) — Luis Lozano + Dr. Shannon (Claude Opus 4.6)
+[Mia Labs](https://mia-labs.com): Luis Lozano + Dr. Shannon (Claude Opus 4.6)
 
 Built in one session. March 10-11, 2026.
