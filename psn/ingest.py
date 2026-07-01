@@ -200,8 +200,8 @@ def chunk_text(text: str, max_len: int = 500, min_len: int = 15) -> list[str]:
     return final
 
 
-def deduplicate_thoughts(thoughts: list[Thought], threshold: float = 0.95) -> list[Thought]:
-    """Remove near-duplicate thoughts (exact or near-exact matches)."""
+def deduplicate_thoughts(thoughts: list[Thought]) -> list[Thought]:
+    """Remove exact-duplicate thoughts (case- and whitespace-normalized)."""
     seen = set()
     unique = []
     for t in thoughts:
