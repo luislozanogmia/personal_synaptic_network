@@ -1,1 +1,4 @@
 psn/__pycache__/
+psn/checkpoints/
+*.pt
+*.zip
